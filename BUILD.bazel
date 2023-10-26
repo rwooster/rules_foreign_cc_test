@@ -1,0 +1,19 @@
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "make")
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+  name = "main_bazel",
+  srcs = ["src/main.cpp"],
+)
+
+filegroup(
+    name = "all",
+    srcs = glob(["src/**"]),
+)
+
+make(
+  name = "main_make",
+  lib_source = ":all",
+  out_binaries = ["main"],
+  targets = ["install"],
+)
